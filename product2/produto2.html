@@ -738,38 +738,7 @@ await import("//facecleanoficial.com/cdn/shopifycloud/shop-js/modules/v2/chunk.m
     [hidden] {
       display: none !important;
     }
-  
-  
-  <style>
-  #qpOverlay{position:fixed;inset:0;z-index:9999;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-  #qpCard{width:90%;max-width:480px;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.15);padding:28px 32px 32px;text-align:center;color:#222}
-  #qpCard h2{margin:0 0 8px;font-size:22px;color:#0d47a1}
-  #qpCard p{margin:0 0 22px;font-size:15px;color:#555}
-  .rpOptions{display:flex;flex-direction:column;gap:10px}
-  .optBtn{width:100%;padding:14px;border:1px solid #cfd8dc;border-radius:8px;background:#fff;font-size:15px;color:#222;cursor:pointer;transition:.2s}
-  .optBtn:hover{border-color:#90a4ae;background:#f5f7fa}
-  .optBtn.selected{background:#e3f2fd;border-color:#0d47a1;color:#0d47a1;font-weight:600}
-  #qpNext{margin-top:22px;padding:12px 36px;border:0;border-radius:8px;background:#0d47a1;color:#fff;font-size:16px;cursor:pointer;transition:.2s}
-  #qpNext:disabled{background:#bbdefb;cursor:not-allowed}
-  #qpProg{height:4px;background:#e3f2fd;border-radius:2px;margin:-28px -32px 24px;overflow:hidden}
-  #qpProg span{display:block;height:100%;background:#0d47a1;width:0;transition:width .35s}
-</style>
-  
   </style>
-
-
-
-    <!-- QUIZZ POPUP INICIO -->
-<div id="qpOverlay">
-  <div id="qpCard">
-    <div id="qpProg"><span></span></div>
-    <h2 id="qpTit">Carregando…</h2>
-    <p id="qpSub"></p>
-    <div id="qpOpts" class="qpOptions"></div>
-    <button id="qpNext" disabled>Próximo</button>
-  </div>
-</div>
-<!-- QUIZZ POPUP FIM -->
 
   <button part="outside-close-button" is="close-button" aria-label="Fechar"><svg role="presentation" stroke-width="2" focusable="false" width="24" height="24" class="icon icon-close" viewBox="0 0 24 24">
         <path d="M17.658 6.343 6.344 17.657M17.658 17.657 6.344 6.343" stroke="currentColor"></path>
@@ -844,8 +813,38 @@ await import("//facecleanoficial.com/cdn/shopifycloud/shop-js/modules/v2/chunk.m
     #shopify-section-sections--25104158097706__header {--header-logo-width: 120px;
         --header-logo-height: 26px;--header-padding-block: var(--spacing-6);
     }
-  }</style>
+  }
+  
+ 
+  #qpOverlay{position:fixed;inset:0;z-index:9999;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  #qpCard{width:90%;max-width:480px;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.15);padding:28px 32px 32px;text-align:center;color:#222}
+  #qpCard h2{margin:0 0 8px;font-size:22px;color:#0d47a1}
+  #qpCard p{margin:0 0 22px;font-size:15px;color:#555}
+  .rpOptions{display:flex;flex-direction:column;gap:10px}
+  .optBtn{width:100%;padding:14px;border:1px solid #cfd8dc;border-radius:8px;background:#fff;font-size:15px;color:#222;cursor:pointer;transition:.2s}
+  .optBtn:hover{border-color:#90a4ae;background:#f5f7fa}
+  .optBtn.selected{background:#e3f2fd;border-color:#0d47a1;color:#0d47a1;font-weight:600}
+  #qpNext{margin-top:22px;padding:12px 36px;border:0;border-radius:8px;background:#0d47a1;color:#fff;font-size:16px;cursor:pointer;transition:.2s}
+  #qpNext:disabled{background:#bbdefb;cursor:not-allowed}
+  #qpProg{height:4px;background:#e3f2fd;border-radius:2px;margin:-28px -32px 24px;overflow:hidden}
+  #qpProg span{display:block;height:100%;background:#0d47a1;width:0;transition:width .35s}
 
+  
+  </style>
+
+<!-- QUIZZ POPUP INICIO -->
+<div id="qpOverlay">
+  <div id="qpCard">
+    <div id="qpProg"><span></span></div>
+    <h2 id="qpTit">Carregando…</h2>
+    <p id="qpSub"></p>
+    <div id="qpOpts" class="qpOptions"></div>
+    <button id="qpNext" disabled>Próximo</button>
+  </div>
+</div>
+<!-- QUIZZ POPUP FIM -->
+
+      
 <height-observer variable="header">
   <store-header class="header">
     <div class="header__wrapper"><div class="header__main-nav">
@@ -1992,7 +1991,7 @@ await import("//facecleanoficial.com/cdn/shopifycloud/shop-js/modules/v2/chunk.m
         return null;
     }
 
-<script>
+
 /* CONFIG PERGUNTAS */
 const perguntas=[
 {t:"Quando você se olha no espelho de luz natural, o que aparece primeiro?",o:["Pele uniforme","Algumas áreas opacas","Manchas marrons bem visíveis","Um mapa de manchas que até eu mesma detesto"]},
@@ -2040,7 +2039,7 @@ function finalizar(){
 next.onclick=avancar;
 mostrarPasso();
 document.body.style.overflow='hidden';   // bloqueia scroll durante quiz
-</script>
+
 
 </script>
 
