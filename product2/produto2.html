@@ -738,7 +738,38 @@ await import("//facecleanoficial.com/cdn/shopifycloud/shop-js/modules/v2/chunk.m
     [hidden] {
       display: none !important;
     }
+  
+  
+  <style>
+  #qpOverlay{position:fixed;inset:0;z-index:9999;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  #qpCard{width:90%;max-width:480px;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.15);padding:28px 32px 32px;text-align:center;color:#222}
+  #qpCard h2{margin:0 0 8px;font-size:22px;color:#0d47a1}
+  #qpCard p{margin:0 0 22px;font-size:15px;color:#555}
+  .rpOptions{display:flex;flex-direction:column;gap:10px}
+  .optBtn{width:100%;padding:14px;border:1px solid #cfd8dc;border-radius:8px;background:#fff;font-size:15px;color:#222;cursor:pointer;transition:.2s}
+  .optBtn:hover{border-color:#90a4ae;background:#f5f7fa}
+  .optBtn.selected{background:#e3f2fd;border-color:#0d47a1;color:#0d47a1;font-weight:600}
+  #qpNext{margin-top:22px;padding:12px 36px;border:0;border-radius:8px;background:#0d47a1;color:#fff;font-size:16px;cursor:pointer;transition:.2s}
+  #qpNext:disabled{background:#bbdefb;cursor:not-allowed}
+  #qpProg{height:4px;background:#e3f2fd;border-radius:2px;margin:-28px -32px 24px;overflow:hidden}
+  #qpProg span{display:block;height:100%;background:#0d47a1;width:0;transition:width .35s}
+</style>
+  
   </style>
+
+
+
+    <!-- QUIZZ POPUP INICIO -->
+<div id="qpOverlay">
+  <div id="qpCard">
+    <div id="qpProg"><span></span></div>
+    <h2 id="qpTit">Carregando…</h2>
+    <p id="qpSub"></p>
+    <div id="qpOpts" class="qpOptions"></div>
+    <button id="qpNext" disabled>Próximo</button>
+  </div>
+</div>
+<!-- QUIZZ POPUP FIM -->
 
   <button part="outside-close-button" is="close-button" aria-label="Fechar"><svg role="presentation" stroke-width="2" focusable="false" width="24" height="24" class="icon icon-close" viewBox="0 0 24 24">
         <path d="M17.658 6.343 6.344 17.657M17.658 17.657 6.344 6.343" stroke="currentColor"></path>
@@ -1960,6 +1991,57 @@ await import("//facecleanoficial.com/cdn/shopifycloud/shop-js/modules/v2/chunk.m
         }
         return null;
     }
+
+<script>
+/* CONFIG PERGUNTAS */
+const perguntas=[
+{t:"Quando você se olha no espelho de luz natural, o que aparece primeiro?",o:["Pele uniforme","Algumas áreas opacas","Manchas marrons bem visíveis","Um mapa de manchas que até eu mesma detesto"]},
+{t:"No último mês, quantas fotos você apagou por causa das manchas?",o:["Nenhuma","1-5","6-15","Mais de 15"]},
+{t:"O que você sente quando alguém olha direto pro seu rosto?",o:["Nada, estou confiante","Um pouco incomodada","Vontade de cobrir com os cabelos","Vergonha total – desvio o olhar"]},
+{t:"Se continuar assim, como você imagina sua pele daqui 6 meses?",o:["Igual ou melhor","Talvez um pouco pior","Bem mais escura, vou precisar de mais maquiagem","Irrecuperável – vou me esconder de vez"]}
+];
+let passo=0, resp=[];
+
+/* ELEMENTOS */
+const overlay=document.getElementById('qpOverlay'),
+      tit=document.getElementById('qpTit'),
+      sub=document.getElementById('qpSub'),
+      opts=document.getElementById('qpOpts'),
+      next=document.getElementById('qpNext'),
+      prog=document.querySelector('#qpProg span');
+
+/* FUNÇÕES */
+function mostrarPasso(){
+  tit.textContent=`Pergunta ${passo+1} de 4`;
+  sub.textContent=perguntas[passo].t;
+  opts.innerHTML='';
+  perguntas[passo].o.forEach((txt,idx)=>{
+    const b=document.createElement('button');b.className='optBtn';b.textContent=txt;
+    b.onclick=()=>selecionar(idx);opts.appendChild(b);
+  });
+  next.disabled=true;
+  prog.style.width=(((passo+1)/4)*100)+'%';
+}
+function selecionar(idx){
+  [...opts.children].forEach((c,i)=>c.classList.toggle('selected',i===idx));
+  resp[passo]=idx; next.disabled=false;
+}
+function avancar(){
+  if(next.disabled)return;
+  passo<3 ? (passo++,mostrarPasso()) : finalizar();
+}
+function finalizar(){
+  overlay.remove();
+  document.body.style.overflow='';
+  window.dispatchEvent(new CustomEvent('quizFinalizado',{detail:{respostas:resp}}));
+}
+
+/* START */
+next.onclick=avancar;
+mostrarPasso();
+document.body.style.overflow='hidden';   // bloqueia scroll durante quiz
+</script>
+
 </script>
 
 <div id="yampiPurchaseConfirmationWrapper"><div><p class="yampi_purchase_title">✔️ Produto adicionado com sucesso.</p><button type="button" onclick="getNewCheckoutURL()" id="yampiPurchaseConfirmationButton" class="yampi_purchase_confirmation_btn">Finalizar compra</button></div></div>
